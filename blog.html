@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Yan Naing Kyaw</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        body{font-family:'Inter',sans-serif;background-color:#0d1117;color:#fff;margin:0;overflow-x:hidden}h1,.section-title,.loading-text-branding{font-family:'Space Mono',monospace;letter-spacing:-.025em}
+        .text-green{color:#38b2ac}.bg-dark-blue{background-color:#0d1117}.content-hidden{opacity:0;visibility:hidden}.content-visible{opacity:1;visibility:visible;transition:opacity .5s ease-in}
+        .page-section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8rem 1rem 4rem;width:100%;}
+        .nav-link{position:relative;color:#fff;padding:.5rem 1rem;text-decoration:none}.nav-link::after{content:'';position:absolute;left:50%;bottom:0;width:0;height:2px;background-color:#38b2ac;transition:width .3s ease-in-out,left .3s ease-in-out}.nav-link:hover::after,.nav-link.active::after{width:100%;left:0}
+        .blog-card{transition:transform .3s ease,box-shadow .3s ease;position:relative;z-index:1;overflow:hidden}.blog-card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 10px 20px rgba(0,255,0,.3);z-index:2}
+        .pagination-link{padding:0.5rem 1rem;margin:0 0.25rem;border-radius:0.5rem;transition:background-color 0.3s;color:white;border: 1px solid #38b2ac;}
+        .pagination-link:hover{background-color: #38b2ac;color: #0d1117;}
+        .pagination-link.active{background-color: #38b2ac;color: #0d1117;font-weight: bold;cursor:default;}
+    </style>
+</head>
+<body class="bg-dark-blue text-white">
+    <div id="main-content" class="content-hidden">
+        <header class="sticky top-0 left-0 w-full bg-dark-blue z-50 shadow-lg py-4 px-6 md:px-12 flex justify-between items-center rounded-b-xl">
+            <a href="index.html" class="text-3xl md:text-4xl font-extrabold text-green section-title flex items-center">
+                <i class="fas fa-terminal mr-3"></i> Yan Naing Kyaw
+            </a>
+            <nav class="space-x-4 md:space-x-8">
+                <a href="index.html" class="nav-link text-lg md:text-xl font-semibold">Home</a>
+                <a href="blog.html" class="nav-link text-lg md:text-xl font-semibold active">Blog</a>
+                <a href="index.html#skills" class="nav-link text-lg md:text-xl font-semibold">Skills</a>
+                <a href="index.html#certifications" class="nav-link text-lg md:text-xl font-semibold">Certifications</a>
+            </nav>
+        </header>
+        
+        <section id="blog" class="page-section bg-gray-900">
+            <h2 class="text-5xl md:text-6xl font-extrabold mb-12 text-green text-center section-title">All Blog Posts</h2>
+            <div id="posts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"></div>
+            <div id="pagination-container" class="mt-16 flex justify-center items-center flex-wrap"></div>
+        </section>
+    </div>
+
+    <script src="posts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('main-content').classList.remove('content-hidden');
+            document.getElementById('main-content').classList.add('content-visible');
+
+            const postsContainer = document.getElementById('posts-container');
+            const paginationContainer = document.getElementById('pagination-container');
+            const postsPerPage = 9;
+            const reversedPosts = posts.slice().reverse();
+            const urlParams = new URLSearchParams(window.location.search);
+            let currentPage = parseInt(urlParams.get('page')) || 1;
+            const totalPages = Math.ceil(reversedPosts.length / postsPerPage);
+
+            function displayPosts(page) {
+                postsContainer.innerHTML = '';
+                const startIndex = (page - 1) * postsPerPage;
+                const paginatedPosts = reversedPosts.slice(startIndex, startIndex + postsPerPage);
+                paginatedPosts.forEach(post => {
+                    postsContainer.innerHTML += `
+                        <a href="post.html?name=${post.slug}" class="blog-card block bg-gray-800 rounded-xl shadow-xl overflow-hidden text-left">
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="${post.image}" alt="${post.title}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                            </div>
+                            <div class="p-6">
+                                <h4 class="text-2xl font-bold text-white mb-2">${post.title}</h4>
+                                <p class="text-green text-sm font-semibold mb-4">${post.date} &bull; ${post.tags}</p>
+                                <p class="text-gray-300 text-base line-clamp-3">${post.description}</p>
+                            </div>
+                        </a>`;
+                });
+            }
+
+            function setupPagination() {
+                paginationContainer.innerHTML = '';
+                for (let i = 1; i <= totalPages; i++) {
+                    const linkClass = i === currentPage ? 'pagination-link active' : 'pagination-link';
+                    paginationContainer.innerHTML += `<a href="blog.html?page=${i}" class="${linkClass}">${i}</a>`;
+                }
+            }
+
+            if (postsContainer) {
+                displayPosts(currentPage);
+                if (totalPages > 1) {
+                    setupPagination();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
