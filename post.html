@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post - Yan Naing Kyaw</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        body{font-family:'Inter',sans-serif;background-color:#0d1117;color:#fff;margin:0;overflow-x:hidden}h1,.section-title,.loading-text-branding{font-family:'Space Mono',monospace;letter-spacing:-.025em}
+        .text-green{color:#38b2ac}.bg-dark-blue{background-color:#0d1117}
+        .content-hidden{opacity:0;visibility:hidden}.content-visible{opacity:1;visibility:visible;transition:opacity .5s ease-in}
+        .page-section{display:flex;flex-direction:column;align-items:center;padding:8rem 1rem 4rem;width:100%;min-height:100vh}
+        .nav-link{position:relative;color:#fff;padding:.5rem 1rem;text-decoration:none}.nav-link::after{content:'';position:absolute;left:50%;bottom:0;width:0;height:2px;background-color:#38b2ac;transition:width .3s ease-in-out,left .3s ease-in-out}.nav-link:hover::after,.nav-link.active::after{width:100%;left:0}
+        #post-content-area {background-color: #161b22;border: 1px solid #30363d;border-radius: 1rem;padding: 2rem;}
+        #post-content h2, #post-content h3 {font-family: 'Space Mono', monospace;color: #38b2ac;margin-top: 2.5rem;margin-bottom: 1rem;padding-bottom: 0.5rem;border-bottom: 1px solid #30363d;}
+        #post-content h2 { font-size: 2rem; }
+        #post-content h3 { font-size: 1.5rem; }
+        #post-content p {line-height: 1.75;margin-bottom: 1.25rem;color: #c9d1d9;}
+        #post-content a {color: #58a6ff;text-decoration: underline;transition: color 0.2s ease-in-out;}
+        #post-content a:hover { color: #38b2ac; }
+        #post-content ul, #post-content ol {margin-left: 1.5rem;margin-bottom: 1.25rem;}
+        #post-content li { margin-bottom: 0.5rem; }
+        #post-content img {max-width: 100%;height: auto;border-radius: 0.75rem;margin-top: 1rem;margin-bottom: 1rem;border: 1px solid #30363d;}
+        #post-content code {background-color: #30363d;color: #c9d1d9;padding: 0.2rem 0.4rem;border-radius: 0.3rem;font-family: 'Space Mono', monospace;font-size: 0.9em;}
+        #post-content pre {background-color: #0d1117;padding: 1.5rem;border-radius: 0.5rem;overflow-x: auto;margin-bottom: 1.5rem;border: 1px solid #30363d;}
+        #post-content pre code {background-color: transparent;padding: 0;font-size: 1em;}
+    </style>
+</head>
+<body class="bg-dark-blue text-white">
+    <header class="sticky top-0 left-0 w-full bg-dark-blue z-50 shadow-lg py-4 px-6 md:px-12 flex justify-between items-center rounded-b-xl">
+        <a href="index.html" class="text-3xl md:text-4xl font-extrabold text-green section-title flex items-center">
+            <i class="fas fa-terminal mr-3"></i> Yan Naing Kyaw
+        </a>
+        <nav class="space-x-4 md:space-x-8">
+            <a href="index.html" class="nav-link text-lg md:text-xl font-semibold">Home</a>
+            <a href="blog.html" class="nav-link text-lg md:text-xl font-semibold active">Blog</a>
+            <a href="index.html#skills" class="nav-link text-lg md:text-xl font-semibold">Skills</a>
+            <a href="index.html#certifications" class="nav-link text-lg md:text-xl font-semibold">Certifications</a>
+        </nav>
+    </header>
+
+    <div id="main-content" class="content-hidden">
+        <section class="page-section">
+            <div class="max-w-4xl mx-auto w-full px-4 text-left">
+                <div id="post-image-container" class="mb-8">
+                    <img id="post-image" src="https://placehold.co/1200x600/2d3748/38b2ac?text=Loading+Image..." alt="Post featured image" class="w-full h-auto object-cover rounded-xl shadow-lg">
+                </div>
+                <h1 id="post-title" class="text-4xl md:text-6xl font-extrabold mb-4 text-green section-title">Loading...</h1>
+                <div id="post-metadata" class="text-gray-400 mb-8 flex items-center space-x-4">
+                    <span id="post-date"></span>
+                    <span>•</span>
+                    <span id="post-tags" class="font-semibold"></span>
+                </div>
+                <div id="post-content-area">
+                    <div id="post-content" class="text-lg text-gray-300"></div>
+                </div>
+                <a href="blog.html" class="mt-12 inline-block text-green hover:text-white transition-colors duration-300">&larr; Back to all posts</a>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="posts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('main-content').classList.remove('content-hidden');
+            document.getElementById('main-content').classList.add('content-visible');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const postSlug = urlParams.get('name');
+            const postData = posts.find(p => p.slug === postSlug);
+
+            if (postData) {
+                document.title = `${postData.title} - Yan Naing Kyaw`;
+                document.getElementById('post-image').src = postData.image;
+                document.getElementById('post-image').alt = postData.title;
+                document.getElementById('post-title').textContent = postData.title;
+                document.getElementById('post-date').textContent = `Published on ${postData.date}`;
+                document.getElementById('post-tags').textContent = postData.tags;
+                fetch(`/posts/${postSlug}.md`)
+                    .then(response => {
+                        if (!response.ok) throw new Error('Post markdown file not found.');
+                        return response.text();
+                    })
+                    .then(markdown => {
+                        document.getElementById('post-content').innerHTML = marked.parse(markdown);
+                    })
+                    .catch(error => {
+                        document.getElementById('post-content').innerHTML = `<p class="text-red-400 font-bold">Error: Could not load the article content.</p><p>${error.message}</p>`;
+                    });
+            } else {
+                document.getElementById('post-title').textContent = 'Post Not Found';
+                document.getElementById('post-content-area').innerHTML = `<p>Sorry, we couldn't find the post you were looking for.</p>`;
+                document.getElementById('post-image-container').style.display = 'none';
+                document.getElementById('post-metadata').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
