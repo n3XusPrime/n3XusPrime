@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yan Naing Kyaw - Cybersecurity Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        body{font-family:'Inter',sans-serif;background-color:#0d1117;color:#fff;margin:0;overflow-x:hidden}
+        h1,.section-title,.loading-text-branding{font-family:'Space Mono',monospace;letter-spacing:-.025em}
+        #loading-screen{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#0d1117;display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:1000;transition:opacity 1s ease-out;overflow:hidden}
+        .protoss-pylon{position:relative;width:250px;height:250px;display:flex;justify-content:center;align-items:center;transform-style:preserve-3d;animation:pylon-pulse 3s infinite ease-in-out}
+        .pylon-base,.pylon-top{position:absolute;width:100px;height:30px;background-color:#00ffff;border-radius:5px;box-shadow:0 0 15px #00ffff,0 0 25px #00ffff,0 0 35px #00ffff;opacity:.8}
+        .pylon-base{bottom:0;transform:translateY(20px) rotateX(70deg) scaleY(.8);animation:pylon-base-appear 1.5s ease-out forwards}.pylon-top{top:0;transform:translateY(-20px) rotateX(-70deg) scaleY(.8);animation:pylon-top-appear 1.5s ease-out forwards}
+        .energy-line{position:absolute;background:linear-gradient(to right,transparent,#00ffff,transparent);height:3px;width:0;border-radius:2px;opacity:0;animation:energy-flow 2s ease-out forwards}.energy-line:nth-child(1){top:30%;left:-20%;transform:rotate(15deg);animation-delay:1s}.energy-line:nth-child(2){top:70%;right:-20%;transform:rotate(-15deg);animation-delay:1.2s}.energy-line:nth-child(3){bottom:10%;left:-10%;transform:rotate(5deg);animation-delay:1.4s}
+        .terminal-scan-effect{position:absolute;width:150px;height:150px;border:2px solid #38b2ac;border-radius:5px;opacity:0;animation:terminal-scan 2s ease-out forwards;animation-delay:.8s;box-shadow:0 0 10px #38b2ac,inset 0 0 10px #38b2ac}
+        .loading-branding{position:absolute;font-size:1.8rem;font-weight:700;color:#38b2ac;text-align:center;display:flex;align-items:center;justify-content:center;top:50%;left:50%;transform:translate(-50%,-50%);z-index:5;animation:pulse-glow 1.5s infinite alternate}
+        .loading-branding i{margin-right:8px;font-size:2rem}.text-green{color:#38b2ac}.bg-dark-blue{background-color:#0d1117}.content-hidden{opacity:0;visibility:hidden}.content-visible{opacity:1;visibility:visible;transition:opacity .5s ease-in}.blog-card{transition:transform .3s ease,box-shadow .3s ease;position:relative;z-index:1;overflow:hidden}.blog-card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 10px 20px rgba(0,255,0,.3);z-index:2}
+        .page-section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8rem 1rem;width:100%;}
+        .nav-link{position:relative;color:#fff;padding:.5rem 1rem;text-decoration:none}.nav-link::after{content:'';position:absolute;left:50%;bottom:0;width:0;height:2px;background-color:#38b2ac;transition:width .3s ease-in-out,left .3s ease-in-out}.nav-link:hover::after,.nav-link.active::after{width:100%;left:0}
+        .typed-cursor{display:inline-block;background-color:#38b2ac;width:.35rem;height:1.25em;margin-left:.25rem;vertical-align:middle;animation:blink-cursor .75s step-end infinite}
+        @keyframes pylon-pulse{0%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.05);filter:brightness(1.2)}100%{transform:scale(1);filter:brightness(1)}}@keyframes pylon-base-appear{0%{transform:translateY(100px) rotateX(90deg) scale(0);opacity:0}100%{transform:translateY(20px) rotateX(70deg) scaleY(.8);opacity:.8}}@keyframes pylon-top-appear{0%{transform:translateY(-100px) rotateX(-90deg) scale(0);opacity:0}100%{transform:translateY(-20px) rotateX(-70deg) scaleY(.8);opacity:.8}}@keyframes energy-flow{0%{width:0;opacity:0}50%{width:100%;opacity:1}100%{width:0;opacity:0}}@keyframes terminal-scan{0%{transform:scale(.5);opacity:0;border-width:5px}50%{transform:scale(1.1);opacity:.8;border-width:2px}100%{transform:scale(1.5);opacity:0;border-width:0}}@keyframes pulse-glow{0%{text-shadow:0 0 5px #38b2ac,0 0 10px #38b2ac;opacity:1}100%{text-shadow:0 0 15px #38b2ac,0 0 25px #38b2ac;opacity:.9}}@keyframes blink-cursor{0%,to{background-color:transparent}50%{background-color:#38b2ac}}
+    </style>
+</head>
+<body class="bg-dark-blue text-white">
+
+    <div id="loading-screen">
+        <div class="protoss-pylon">
+            <div class="pylon-base"></div>
+            <div class="loading-branding loading-text-branding"><i class="fas fa-terminal"></i> Yan Naing Kyaw</div>
+            <div class="pylon-top"></div>
+            <div class="energy-line"></div>
+            <div class="energy-line"></div>
+            <div class="energy-line"></div>
+            <div class="terminal-scan-effect"></div>
+        </div>
+        <p class="mt-8 text-2xl font-bold text-green section-title">Activating Warp Gate...</p>
+    </div>
+
+    <div id="main-content" class="content-hidden">
+        <header class="fixed top-0 left-0 w-full bg-dark-blue z-50 shadow-lg py-4 px-6 md:px-12 flex justify-between items-center rounded-b-xl">
+            <a href="#home" class="text-3xl md:text-4xl font-extrabold text-green section-title flex items-center">
+                <i class="fas fa-terminal mr-3"></i> Yan Naing Kyaw
+            </a>
+            <nav class="space-x-4 md:space-x-8">
+                <a href="#home" class="nav-link text-lg md:text-xl font-semibold active">Home</a>
+                <a href="blog.html" class="nav-link text-lg md:text-xl font-semibold">Blog</a>
+                <a href="#skills" class="nav-link text-lg md:text-xl font-semibold">Skills</a>
+                <a href="#certifications" class="nav-link text-lg md:text-xl font-semibold">Certifications</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="home" class="page-section text-center">
+                <div class="max-w-5xl mx-auto">
+                    <img src="https://placehold.co/150x150/2d3748/38b2ac?text=YK" alt="Yan Naing Kyaw" class="rounded-full mx-auto mb-6 border-4 border-green shadow-xl">
+                    <h2 class="text-4xl md:text-6xl font-extrabold mb-4 text-green section-title">
+                        <span id="about-me-heading-typed-text"></span><span class="typed-cursor"></span>
+                    </h2>
+                    <p class="text-lg md:text-xl leading-relaxed text-gray-300 mt-4 max-w-3xl mx-auto">
+                        A dedicated Computer Network Systems Management student with a strong passion for <span class="text-green font-semibold">Cybersecurity</span>. I'm constantly exploring the depths of network protocols, system vulnerabilities, and robust defense mechanisms.
+                    </p>
+                    <div class="mt-8 flex justify-center space-x-6">
+                        <a href="mailto:your.email@example.com" class="text-green hover:text-white transition-colors duration-300 text-3xl"><i class="fas fa-envelope"></i></a>
+                        <a href="https://linkedin.com/in/yourprofile" target="_blank" class="text-green hover:text-white transition-colors duration-300 text-3xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/yourprofile" target="_blank" class="text-green hover:text-white transition-colors duration-300 text-3xl"><i class="fab fa-github"></i></a>
+                    </div>
+
+                    <h3 class="text-4xl font-extrabold mt-24 mb-8 text-green section-title">Featured Blog Posts</h3>
+                    <div id="featured-posts-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"></div>
+                    <a href="blog.html" class="mt-10 inline-block px-8 py-3 bg-green text-white font-bold rounded-full shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105">View All Blog Posts</a>
+                </div>
+            </section>
+
+            <section id="skills" class="page-section bg-gray-900">
+                <div class="max-w-6xl mx-auto w-full text-center">
+                    <h2 class="text-5xl md:text-6xl font-extrabold mb-12 text-green section-title">Skills</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                        <div class="bg-gray-800 rounded-xl p-6 text-center shadow-xl hover:bg-gray-700 transition-all duration-300"><i class="fab fa-linux text-6xl text-green mb-4"></i><h3 class="text-xl font-semibold text-white">Linux</h3><p class="text-gray-400 text-sm mt-2">OS administration, scripting, CLI</p></div>
+                        <div class="bg-gray-800 rounded-xl p-6 text-center shadow-xl hover:bg-gray-700 transition-all duration-300"><i class="fas fa-network-wired text-6xl text-green mb-4"></i><h3 class="text-xl font-semibold text-white">Wireshark</h3><p class="text-gray-400 text-sm mt-2">Packet analysis</p></div>
+                        <div class="bg-gray-800 rounded-xl p-6 text-center shadow-xl hover:bg-gray-700 transition-all duration-300"><i class="fas fa-shield-alt text-6xl text-green mb-4"></i><h3 class="text-xl font-semibold text-white">Cybersecurity</h3><p class="text-gray-400 text-sm mt-2">Threat analysis, defense</p></div>
+                        <div class="bg-gray-800 rounded-xl p-6 text-center shadow-xl hover:bg-gray-700 transition-all duration-300"><i class="fas fa-route text-6xl text-green mb-4"></i><h3 class="text-xl font-semibold text-white">Networking</h3><p class="text-gray-400 text-sm mt-2">Protocols, routing</p></div>
+                        <div class="bg-gray-800 rounded-xl p-6 text-center shadow-xl hover:bg-gray-700 transition-all duration-300"><i class="fab fa-python text-6xl text-green mb-4"></i><h3 class="text-xl font-semibold text-white">Python</h3><p class="text-gray-400 text-sm mt-2">Scripting, automation</p></div>
+                        <div class="bg-gray-800 rounded-xl p-6 text-center shadow-xl hover:bg-gray-700 transition-all duration-300"><i class="fas fa-user-secret text-6xl text-green mb-4"></i><h3 class="text-xl font-semibold text-white">Ethical Hacking</h3><p class="text-gray-400 text-sm mt-2">Vulnerability assessment</p></div>
+                        <div class="bg-gray-800 rounded-xl p-6 text-center shadow-xl hover:bg-gray-700 transition-all duration-300"><i class="fas fa-microscope text-6xl text-green mb-4"></i><h3 class="text-xl font-semibold text-white">Digital Forensics</h3><p class="text-gray-400 text-sm mt-2">Incident response</p></div>
+                        <div class="bg-gray-800 rounded-xl p-6 text-center shadow-xl hover:bg-gray-700 transition-all duration-300"><i class="fas fa-cloud text-6xl text-green mb-4"></i><h3 class="text-xl font-semibold text-white">Cloud Security</h3><p class="text-gray-400 text-sm mt-2">AWS, Azure practices</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="certifications" class="page-section">
+                <div class="max-w-5xl mx-auto w-full text-center">
+                    <h2 class="text-5xl md:text-6xl font-extrabold mb-12 text-green section-title">Certifications</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-gray-800 rounded-xl p-6 text-center shadow-xl"><i class="fas fa-certificate text-6xl text-green mb-4"></i><h3 class="text-2xl font-bold text-white mb-2">CompTIA Security+</h3><p class="text-gray-300">Validation of baseline cybersecurity skills and knowledge.</p><p class="text-green text-sm mt-4">Issued: Jan 2024</p></div>
+                        <div class="bg-gray-800 rounded-xl p-6 text-center shadow-xl"><i class="fas fa-award text-6xl text-green mb-4"></i><h3 class="text-2xl font-bold text-white mb-2">Cisco CCNA</h3><p class="text-gray-300">Understanding of networking fundamentals and security.</p><p class="text-green text-sm mt-4">Issued: Mar 2024</p></div>
+                        <div class="bg-gray-800 rounded-xl p-6 text-center shadow-xl"><i class="fas fa-user-shield text-6xl text-green mb-4"></i><h3 class="text-2xl font-bold text-white mb-2">(Planned) CEH</h3><p class="text-gray-300">Planning to pursue for in-depth ethical hacking knowledge.</p><p class="text-green text-sm mt-4">Expected: Late 2025</p></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="posts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            const mainContent = document.getElementById('main-content');
+
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    mainContent.classList.remove('content-hidden');
+                    mainContent.classList.add('content-visible');
+                    const typedTextSpan = document.getElementById('about-me-heading-typed-text');
+                    if (typedTextSpan) {
+                        const textToType = "About Me";
+                        let charIndex = 0;
+                        function type() {
+                            if (charIndex < textToType.length) {
+                                typedTextSpan.textContent += textToType.charAt(charIndex++);
+                                setTimeout(type, 120);
+                            }
+                        }
+                        type();
+                    }
+                }, 500);
+            }, 3000);
+
+            const featuredContainer = document.getElementById('featured-posts-container');
+            if (featuredContainer) {
+                const featuredPosts = posts.filter(p => p.featured).slice(0, 4);
+                let postsHTML = '';
+                featuredPosts.forEach(post => {
+                    postsHTML += `
+                        <a href="post.html?name=${post.slug}" class="blog-card block bg-gray-800 rounded-xl shadow-xl overflow-hidden text-left">
+                            <div class="p-6">
+                                <h4 class="text-2xl font-bold text-white mb-2">${post.title}</h4>
+                                <p class="text-green text-sm font-semibold mb-4">${post.tags}</p>
+                                <p class="text-gray-300 text-base line-clamp-3">${post.description}</p>
+                            </div>
+                        </a>`;
+                });
+                featuredContainer.innerHTML = postsHTML;
+            }
+
+            const sections = document.querySelectorAll('.page-section');
+            const navLinks = document.querySelectorAll('header nav a');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            const href = link.getAttribute('href');
+                            if (href.startsWith('#')) {
+                                link.classList.toggle('active', href === `#${entry.target.id}`);
+                            }
+                        });
+                    }
+                });
+            }, { threshold: 0.5 });
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
+</body>
+</html>
