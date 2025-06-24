@@ -2,7 +2,7 @@
 
 const posts = [
     {
-        id: 1,
+        id: 3,
         slug: 'setting-up-a-secure-linux-lab',
         title: 'Setting Up a Secure Linux Lab',
         description: 'A comprehensive guide to setting up a secure Linux lab environment for cybersecurity training...',
@@ -22,13 +22,13 @@ const posts = [
         featured: true
     },
     {
-        id: 3,
-        slug: 'exploring-open-source-intelligence-tools',
-        title: 'Exploring OSINT Tools',
-        description: 'An overview of powerful OSINT tools and techniques used for information gathering...',
-        tags: '#OSINT #Cybersecurity #InfoGathering',
-        date: 'June 8, 2025',
-        image: 'https://placehold.co/1200x600/2d3748/38b2ac?text=OSINT+Tools',
+        id: 1,
+        slug: 'neverssl-and-public-wifi-not-connected-to-the-internet.md',
+        title: 'Why Neverssl fixes Public Wifi Captive Portal Issues',
+        description: '',
+        tags: '#Networking #QuickFixes #Cybersecurity',
+        date: 'June 24, 2025',
+        image: '',
         featured: true
     },
     {
