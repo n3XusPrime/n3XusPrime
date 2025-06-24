@@ -28,7 +28,7 @@ const posts = [
         description: 'The role of HTTP/HTTPS requests on the Captive Portals',
         tags: '#Networking #QuickFixes #Cybersecurity',
         date: 'June 24, 2025',
-        image: '',
+        image: 'https://placehold.co/600x400/2d3748/38b2ac?text=NeverSSL+and+Public+Wifi+Issues',
         featured: true
     },
     {
