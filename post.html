@@ -80,7 +80,7 @@
                 document.getElementById('post-title').textContent = postData.title;
                 document.getElementById('post-date').textContent = `Published on ${postData.date}`;
                 document.getElementById('post-tags').textContent = postData.tags;
-                fetch(`/posts/${postSlug}.md`)
+                fetch(`./posts/${postSlug}.md`)
                     .then(response => {
                         if (!response.ok) throw new Error('Post markdown file not found.');
                         return response.text();
