@@ -23,9 +23,9 @@ const posts = [
     },
     {
         id: 3,
-        slug: 'neverssl-and-public-wifi-not-connected-to-the-internet.md',
+        slug: 'neverssl-and-public-wifi-not-connected-to-the-internet',
         title: 'Why Neverssl fixes Public Wifi Captive Portal Issues',
-        description: '',
+        description: 'The role of HTTP/HTTPS requests on the Captive Portals',
         tags: '#Networking #QuickFixes #Cybersecurity',
         date: 'June 24, 2025',
         image: '',
