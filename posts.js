@@ -2,7 +2,7 @@
 
 const posts = [
     {
-        id: 3,
+        id: 1,
         slug: 'setting-up-a-secure-linux-lab',
         title: 'Setting Up a Secure Linux Lab',
         description: 'A comprehensive guide to setting up a secure Linux lab environment for cybersecurity training...',
@@ -22,7 +22,7 @@ const posts = [
         featured: true
     },
     {
-        id: 1,
+        id: 3,
         slug: 'neverssl-and-public-wifi-not-connected-to-the-internet.md',
         title: 'Why Neverssl fixes Public Wifi Captive Portal Issues',
         description: '',
